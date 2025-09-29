@@ -19,6 +19,7 @@
       padding: 10px 20px;
       font-size: 16px;
       margin-left: 10px;
+      cursor: pointer;
     }
     .logo {
       font-size: 48px;
@@ -28,15 +29,55 @@
     .logo span:nth-child(2) { color: #EA4335; }
     .logo span:nth-child(3) { color: #FBBC05; }
     .logo span:nth-child(4) { color: #34A853; }
+    .results {
+      margin-top: 30px;
+      font-size: 18px;
+      color: #333;
+    }
+    .result-item {
+      margin: 10px 0;
+      color: #1a0dab;
+      text-decoration: underline;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
   <div class="logo">
     <span>D</span><span>u</span><span>m</span><span>y</span>
   </div>
-  <form action="#" method="GET">
-    <input type="text" name="q" placeholder="Search Dummy...">
+
+  <form id="searchForm">
+    <input type="text" id="searchInput" placeholder="Search Dummy...">
     <input type="submit" value="Search">
   </form>
+
+  <div class="results" id="results"></div>
+
+  <script>
+    const form = document.getElementById('searchForm');
+    const input = document.getElementById('searchInput');
+    const resultsDiv = document.getElementById('results');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent actual form submission
+
+      const query = input.value.trim();
+      if(query === "") {
+        resultsDiv.innerHTML = "<p>Please enter something to search!</p>";
+        return;
+      }
+
+      // Dummy search results
+      const dummyResults = [
+        `Result 1 for "${query}"`,
+        `Result 2 for "${query}"`,
+        `Result 3 for "${query}"`,
+        `Result 4 for "${query}"`
+      ];
+
+      resultsDiv.innerHTML = dummyResults.map(item => `<div class="result-item">${item}</div>`).join('');
+    });
+  </script>
 </body>
 </html>
